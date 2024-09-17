@@ -63,9 +63,15 @@ def predict():
     app_order = int(request.form['app_order'])
     course = int(request.form['course'])
 
-    # Create input array for the model
-    features = np.array([[app_mode, app_order, course]])
+     # Create input array for the model
+    init_features = np.array([[app_mode, app_order, course]])
 
+    #print("Initial features", init_features)
+
+    features = scaler.transform(init_features)
+
+
+    #print("Transformed features", features)
     # Make prediction
     prediction = model.predict(features)[0]  # Ensure you're extracting the first value
 
